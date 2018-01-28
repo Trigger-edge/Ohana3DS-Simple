@@ -276,6 +276,7 @@ namespace Ohana3DS_Rebirth.Ohana
                     switch (currentFormat)
                     {
                         case FileIO.formatType.container:
+                            ((OContainer)file.data).name = Path.GetFileNameWithoutExtension(fileName);
                             return (OContainer)file.data;
                         case FileIO.formatType.image:
                             ((RenderBase.OTexture)file.data).name = Path.GetFileNameWithoutExtension(fileName);
@@ -313,7 +314,9 @@ namespace Ohana3DS_Rebirth.Ohana
                 case fileType.container:
                     foreach (OContainer.fileEntry file in ((OContainer)data).content)
                     {
-                        fileName = Path.Combine(System.Environment.CurrentDirectory, file.name);
+                        Directory.CreateDirectory(System.Environment.CurrentDirectory + "\\" + ((OContainer)data).name);
+
+                        fileName = Path.Combine(System.Environment.CurrentDirectory + "\\" + ((OContainer)data).name, file.name);
                         string dir = Path.GetDirectoryName(fileName);
                         if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
@@ -331,6 +334,7 @@ namespace Ohana3DS_Rebirth.Ohana
                         if (file.doDecompression) buffer = LZSS_Ninty.decompress(buffer);
 
                         File.WriteAllBytes(fileName, buffer);
+                        Console.WriteLine("Extracted file: " + fileName);
                     }
                     break;
                 case fileType.model:
@@ -345,31 +349,35 @@ namespace Ohana3DS_Rebirth.Ohana
                             case 2: OBJ.export(((RenderBase.OModelGroup)data), fileName + ".obj", i); break;
                             case 3: CMDL.export(((RenderBase.OModelGroup)data), fileName + ".cmdl", i); break;
                         }
+
+                        Console.WriteLine("Extracted file: " + fileName);
                     }
                     break;
                 case fileType.texture:
                     if (data.GetType().Equals(typeof(RenderBase.OModelGroup))) { //if extracting textures from a model
                         Directory.CreateDirectory(System.Environment.CurrentDirectory + "\\" + ((RenderBase.OModelGroup)data).model[0].name + "_tex");
+
                         foreach (RenderBase.OTexture tex in ((RenderBase.OModelGroup)data).texture)
                         {
                             fileName = Path.Combine(System.Environment.CurrentDirectory + "\\" + ((RenderBase.OModelGroup)data).model[0].name + "_tex", tex.name + ".png");
                             tex.texture.Save(fileName);
+                            Console.WriteLine("Extracted file: " + fileName);
                         }
                     }
                     else // not a model
                     {
                         fileName = Path.Combine(System.Environment.CurrentDirectory, ((RenderBase.OTexture)data).name + ".png");
                         ((RenderBase.OTexture)data).texture.Save(fileName);
-
+                        Console.WriteLine("Extracted file: " + fileName);
                     }
                     break;
                 case fileType.skeletalAnimation:
                     fileName = Path.Combine(System.Environment.CurrentDirectory, ((RenderBase.OModelGroup)data).model[0].name);
                     SMD.export((RenderBase.OModelGroup)data, fileName, arguments[0], arguments[1]);
+                    Console.WriteLine("Extracted file: " + fileName);
                     break;
             }
-
-            Console.WriteLine("Extracted files to: " + fileName);
+            Console.WriteLine("Extracting files completed!");
         }
     }
 }

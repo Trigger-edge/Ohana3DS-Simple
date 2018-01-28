@@ -8,7 +8,7 @@ namespace Ohana3DS_Simple
         static void Main(string[] args)
         {
             //You can manually set the args here for debug/etc.
-            //args = new string[] { "-e", "example.bcres", "model"};
+            //args = new string[] { "-e", "container.arc", "container"};
             try
             {
                 object importedData = null;
@@ -48,6 +48,7 @@ namespace Ohana3DS_Simple
                 Console.WriteLine("");
                 Console.WriteLine(e.Message);
             }
+            Console.WriteLine("");
             //uncomment for better debugging
             //Console.ReadKey();
         }
