@@ -31,6 +31,8 @@ pause
 
 ### **What to know**
 
-Models are default hardcoded to export as '.dae' files as of 1.0.
+Models are default hardcoded to export as '.dae' files as of first commit.
 
-You might need to make heavy modifications in order to export certain stuff. Animation exporting is untested.
+The default export directory is the same directory the executable is in. This is hardcoded.
+
+You might need to make heavy modifications in order to export certain stuff or exporting it in a different directory. Animation exporting is untested.
