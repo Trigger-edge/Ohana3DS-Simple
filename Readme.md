@@ -35,4 +35,4 @@ Models are default hardcoded to export as '.dae' files as of first commit.
 
 The default export directory is the same directory the executable is in. This is hardcoded.
 
-You might need to make heavy modifications in order to export certain stuff (Animation exporting is untested) or exporting it in a different directory.
+You may need to make heavy modifications in order to export certain stuff (Animation exporting is untested) or exporting it in a different directory.
