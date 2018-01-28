@@ -11,21 +11,31 @@ This way you could do cool stuff like writing batch scripts so you can easily in
 Example of exporting a '.bcres' model file to '.dae' using a batch script.
 ```
 @echo off
-"Ohana3DS Simple" -e test_model.bcres -model
+"Ohana3DS Simple" -e test_model.bcres model
 pause
 ```
 
 Example of exporting texture files ('.png') from a '.bcres' model file using a batch script.
 ```
 @echo off
-"Ohana3DS Simple" -e test_model.bcres -texture
+"Ohana3DS Simple" -e test_model.bcres texture
 pause
 ```
 
 Example of exporting a '.bclim' texture file to '.png' using a batch script.
 ```
 @echo off
-"Ohana3DS Simple" -e test_texture.bclim -texture
+"Ohana3DS Simple" -e test_texture.bclim texture
+pause
+```
+
+Example of exporting all '.bclim' texture files in current directory to '.png' using a batch script.
+```
+@echo off
+for /r %%i in (*.bclim) do (
+  echo %%i
+  "Ohana3DS Simple" -e "%%i" texture
+)
 pause
 ```
 
