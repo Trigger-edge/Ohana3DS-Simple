@@ -33,7 +33,6 @@ Example of exporting all '.bclim' texture files in current directory to '.png' u
 ```
 @echo off
 for /r %%i in (*.bclim) do (
-  echo %%i
   "Ohana3DS Simple" -e "%%i" texture
 )
 pause
