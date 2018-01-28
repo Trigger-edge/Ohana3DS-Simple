@@ -32,3 +32,5 @@ pause
 ### **What to know**
 
 Models are default hardcoded to export as '.dae' files as of 1.0.
+
+You might need to make heavy modifications in order to export certain stuff. Animation exporting is untested.
